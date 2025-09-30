@@ -14,7 +14,22 @@ export default function AdminLayout({
     { id: '2', name: 'Grupo Mexico', email: 'info@empresab.com' },
     { id: '3', name: 'Liveerpool', email: 'ventas@empresac.com' },
 ]
+
+const optionsClients = [
+    { name: 'Planes', href: '/admin/walmart/planes' },
+    { name: 'Asociados', href: '/admin/walmart/asociados' },
+    { name: 'Liberaciones', href: '/admin/walmart/liberaciones' },
+]
+
   const [walmartSubmenuOpen, setWalmartSubmenuOpen] = useState(false);
+  const [openSubmenus, setOpenSubmenus] = useState<Record<string, boolean>>({});
+
+  const toggleSubmenu = (clientId: string) => {
+    setOpenSubmenus(prev => ({
+      ...prev,
+      [clientId]: !prev[clientId]
+    }));
+  };
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -32,83 +47,59 @@ export default function AdminLayout({
           </div>
           
           <ul className="mt-2 space-y-1">
-            <li>
-              <button
-                onClick={() => setWalmartSubmenuOpen(!walmartSubmenuOpen)}
-                className="w-full flex items-center justify-between px-6 py-2 text-sm font-medium text-blue-700 bg-blue-50 border-r-2 border-blue-700 hover:bg-blue-100 transition-colors"
-              >
-                <div className="flex items-center">
-                  <span className="mr-3"><img src="/walmart.png" alt="Walmart Logo" className="w-4 h-4" /></span>
-                  Walmart
-                </div>
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    walmartSubmenuOpen ? 'rotate-180' : ''
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+            {clients.map((client) => (
+              <li key={client.id}>
+                <button
+                  onClick={() => toggleSubmenu(client.id)}
+                  className="w-full flex items-center justify-between px-6 py-2 text-sm font-medium text-blue-700 bg-blue-50 border-r-2 border-blue-700 hover:bg-blue-100 transition-colors"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              
-              {/* Submenu desplegable */}
-              {walmartSubmenuOpen && (
-                <ul className="mt-1 space-y-1 bg-blue-25 border-l-2 border-blue-200 ml-6">
-                  <li>
-                    <a
-                      href="/admin/walmart/planes"
-                      className="flex items-center px-6 py-2 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
-                    >
-                      <span className="mr-3">📋</span>
-                      Planes
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/admin/walmart/asociados"
-                      className="flex items-center px-6 py-2 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
-                    >
-                      <span className="mr-3">🤝</span>
-                      Asociados
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/admin/walmart/liberaciones"
-                      className="flex items-center px-6 py-2 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
-                    >
-                      <span className="mr-3">🚀</span>
-                      Liberaciones
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </li>
-            <li>
-              <a
-                href="/admin/users"
-                className="flex items-center px-6 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-              >
-                <span className="mr-3">👥</span>
-                Grupo Mexico
-              </a>
-            </li>
-            <li>
-              <a
-                href="/admin/inventory"
-                className="flex items-center px-6 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-              >
-                <span className="mr-3">📦</span>
-                Liverpool
-              </a>
-            </li>
+                  <div className="flex items-center">
+                    <span className="mr-3">
+                      {client.name === 'Walmart' && <img src="/walmart.png" alt="Walmart Logo" className="w-4 h-4" />}
+                      {client.name === 'Grupo Mexico' && '🏭'}
+                      {client.name === 'Liveerpool' && '🏪'}
+                    </span>
+                    {client.name}
+                  </div>
+                  <svg
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      openSubmenus[client.id] ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                
+                {/* Submenu desplegable */}
+                {openSubmenus[client.id] && (
+                  <ul className="mt-1 space-y-1 bg-blue-25 border-l-2 border-blue-200 ml-6">
+                    {optionsClients.map((option, index) => (
+                      <li key={index}>
+                        <a
+                          href={`/admin/${client.name.toLowerCase().replace(' ', '-')}/${option.name.toLowerCase()}`}
+                          className="flex items-center px-6 py-2 text-sm text-blue-600 hover:text-blue-800 hover:bg-blue-50 transition-colors"
+                        >
+                          <span className="mr-3">
+                            {option.name === 'Planes' && '📋'}
+                            {option.name === 'Asociados' && '🤝'}
+                            {option.name === 'Liberaciones' && '🚀'}
+                          </span>
+                          {option.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
             <li>
               <a
                 href="/admin/notifications"
@@ -149,7 +140,7 @@ export default function AdminLayout({
         </nav>
 
         {/* User Profile Section */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 border-t">
+        <div className="absolute bottom-0 left-0 right-0 p-6">
           <div className="flex items-center">
             <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-medium">
               A
