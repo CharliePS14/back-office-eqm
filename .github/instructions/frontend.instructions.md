@@ -13,6 +13,7 @@ Provide project context and coding guidelines that AI should follow when generat
 
 2. **Architecture**:
    - This project implements the Feature-Sliced Design (FSD) architecture adapted for Next.js App Router. Each feature, entity, widget, or page must be organized as a separate slice within the `src/` directory.
+   - Files and folders should follow camelCase naming conventions, for example: "exampleComponent", "userProfile", "dataTable"
    - Each slice should contain the following subfolders, each with a clear responsibility:
       - `model/` → business logic, local state, selectors, server actions
       - `ui/` → visual components specific to the slice (client and server components)
