@@ -23,23 +23,22 @@ export type VestingScheduleStatus =
   | "expired";
 
 export interface StockPlan {
-  title: string;
-  stock_plan_id: string;
-  external_id: string;
-  contract_type: ContractType;
+  stockPlanId: string;
+  externalId: string;
+  type: ContractType;
   symbol: string;
+  title: string;
   description: string;
-  total_shares: number;
-  total_vested_shares: number;
-  total_non_vestedshares: number;
+  totalShares: number;
+  totalVestedShares: number;
+  totalNonVestedshares: number;
 }
 
 export interface DashboardSummary {
-  stockPlansResume: StockPlansResume;
-  totalAssigned: StockAssignment;
-  totalReleased: StockAssignment;
-  totalPending: StockAssignment;
   stockPlans: StockPlan[];
+  totalVestedShares: number;
+  totalNonVestedShares: number;
+  totalAssignedShares: number;
 }
 
 // API Response types

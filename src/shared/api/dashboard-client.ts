@@ -10,6 +10,8 @@ import {
 export class DashboardApiClient {
   private static getBaseURL(): string {
     // En server-side (build time), usar URL interna
+    console.log(process.env.NEXT_PUBLIC_API_URL);
+
     if (typeof window === "undefined") {
       return process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
     }
@@ -23,27 +25,28 @@ export class DashboardApiClient {
   static async getDashboardSummary(): Promise<DashboardSummary> {
     try {
       const baseURL = this.getBaseURL();
-      const response = await fetch(`${baseURL}/api/dashboard/summary`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `${baseURL}/api/backoffice/v1/companies/5c6c72b4-1aba-494f-8522-32366e3156cf/stock-plans/balance`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-functions-key": process.env.NEXT_PUBLIC_API_KEY || "",
+          },
+          next: {
+            revalidate: 300, // Revalidar cada 5 minutos
+          },
         },
-        next: {
-          revalidate: 300, // Revalidar cada 5 minutos
-        },
-      });
+      );
+      console.log(response);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result: ApiResponse<DashboardSummary> = await response.json();
+      const result: DashboardSummary = await response.json();
 
-      if (!result.success) {
-        throw new Error(result.message || "Failed to fetch dashboard summary");
-      }
-
-      return result.data;
+      return result;
     } catch (error) {
       console.error("Error fetching dashboard summary:", error);
       throw error;
@@ -73,12 +76,13 @@ export class DashboardApiClient {
 
       const queryString = searchParams.toString();
       const baseURL = this.getBaseURL();
-      const url = `${baseURL}/api/dashboard/stock-plans${queryString ? `?${queryString}` : ""}`;
+      const url = `${baseURL}/api/backoffice/v1/companies/5c6c72b4-1aba-494f-8522-32366e3156cf/stock-plans/balance${queryString ? `?${queryString}` : ""}`;
 
       const response = await fetch(url, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "x-functions-key": process.env.NEXT_PUBLIC_API_KEY || "",
         },
         next: {
           revalidate: 60, // Revalidar cada minuto
@@ -89,13 +93,9 @@ export class DashboardApiClient {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result: ApiResponse<StockPlan[]> = await response.json();
+      const result: DashboardSummary = await response.json();
 
-      if (!result.success) {
-        throw new Error(result.message || "Failed to fetch stock plans");
-      }
-
-      return result.data;
+      return result.stockPlans;
     } catch (error) {
       console.error("Error fetching stock plans:", error);
       throw error;
@@ -114,6 +114,7 @@ export class DashboardApiClient {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            "x-functions-key": process.env.NEXT_PUBLIC_API_KEY || "",
           },
           next: {
             revalidate: 300, // Revalidar cada 5 minutos

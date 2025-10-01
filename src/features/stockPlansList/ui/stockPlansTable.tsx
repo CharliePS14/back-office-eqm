@@ -18,7 +18,7 @@ function StockPlanRow({ plan }: { plan: StockPlan }) {
   const router = useRouter();
 
   const handleRowClick = () => {
-    router.push(`/admin/stock-plan/${plan.stock_plan_id}`);
+    router.push(`/admin/stock-plan/${plan.stockPlanId}`);
   };
 
   return (
@@ -27,13 +27,13 @@ function StockPlanRow({ plan }: { plan: StockPlan }) {
       onClick={handleRowClick}
     >
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-        {plan.external_id}
+        {plan.externalId}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
         {plan.title}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-        {plan.total_non_vestedshares}
+        {plan.totalNonVestedshares}
       </td>
     </tr>
   );
@@ -135,8 +135,8 @@ export function StockPlansTable({ filters }: StockPlansTableProps) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {stockPlans.map((plan) => (
-              <StockPlanRow key={plan.stock_plan_id} plan={plan} />
+            {stockPlans.map((plan, index) => (
+              <StockPlanRow key={plan.stockPlanId + index} plan={plan} />
             ))}
           </tbody>
         </table>

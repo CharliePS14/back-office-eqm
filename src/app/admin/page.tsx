@@ -3,31 +3,83 @@ import { DashboardApiClient } from "@/shared/api/dashboard-client";
 import { LoadingStats } from "@/shared/ui/loading";
 import { ErrorDisplay } from "@/shared/ui/error-display";
 import { StockPlansWithFilters } from "@/features/stockPlansList/ui/stockPlansWithFilters";
+import { DashboardSummary } from "@/shared/types/dashboard";
+
+// Helper functions to calculate breakdowns
+function calculateBreakdown(dashboardData: DashboardSummary) {
+  const rsuPlans = dashboardData.stockPlans.filter(
+    (plan) => plan.type === "rsu",
+  );
+  const peuPlans = dashboardData.stockPlans.filter(
+    (plan) => plan.type === "peu",
+  );
+
+  const rsuTotalShares = rsuPlans.reduce(
+    (sum, plan) => sum + plan.totalShares,
+    0,
+  );
+  const peuTotalShares = peuPlans.reduce(
+    (sum, plan) => sum + plan.totalShares,
+    0,
+  );
+
+  const rsuVestedShares = rsuPlans.reduce(
+    (sum, plan) => sum + plan.totalVestedShares,
+    0,
+  );
+  const peuVestedShares = peuPlans.reduce(
+    (sum, plan) => sum + plan.totalVestedShares,
+    0,
+  );
+
+  const rsuNonVestedShares = rsuPlans.reduce(
+    (sum, plan) => sum + plan.totalNonVestedshares,
+    0,
+  );
+  const peuNonVestedShares = peuPlans.reduce(
+    (sum, plan) => sum + plan.totalNonVestedshares,
+    0,
+  );
+
+  return {
+    totalAssigned: { rsu: rsuTotalShares, peu: peuTotalShares },
+    totalVested: { rsu: rsuVestedShares, peu: peuVestedShares },
+    totalNonVested: { rsu: rsuNonVestedShares, peu: peuNonVestedShares },
+    activePlans: dashboardData.stockPlans.filter(
+      (plan) => plan.totalNonVestedshares > 0,
+    ).length,
+    inactivePlans: dashboardData.stockPlans.filter(
+      (plan) => plan.totalNonVestedshares === 0,
+    ).length,
+  };
+}
 
 // Server Component - Obtiene datos del BFF
 async function StatsCards() {
   try {
     const dashboardData = await DashboardApiClient.getDashboardSummary();
 
+    const breakdown = calculateBreakdown(dashboardData);
+
     const stats = [
       {
         title: "Acciones Asignadas",
-        value: dashboardData.totalAssigned.total.toString(),
-        change: `${dashboardData.totalAssigned.breakdown.PEU} PEU | ${dashboardData.totalAssigned.breakdown.RSU} RSU`,
+        value: dashboardData.totalAssignedShares.toString(),
+        change: `${breakdown.totalAssigned.peu} PEU | ${breakdown.totalAssigned.rsu} RSU`,
         changeType: "neutral",
         icon: "📦",
       },
       {
         title: "Acciones Liberadas",
-        value: dashboardData.totalReleased.total.toString(),
-        change: `${dashboardData.totalReleased.breakdown.PEU} PEU | ${dashboardData.totalReleased.breakdown.RSU} RSU`,
+        value: dashboardData.totalVestedShares.toString(),
+        change: `${breakdown.totalVested.peu} PEU | ${breakdown.totalVested.rsu} RSU`,
         changeType: "positive",
         icon: "🔔",
       },
       {
         title: "Acciones Pendientes",
-        value: dashboardData.totalPending.total.toString(),
-        change: `${dashboardData.totalPending.breakdown.PEU} PEU | ${dashboardData.totalPending.breakdown.RSU} RSU`,
+        value: dashboardData.totalNonVestedShares.toString(),
+        change: `${breakdown.totalNonVested.peu} PEU | ${breakdown.totalNonVested.rsu} RSU`,
         changeType: "negative",
         icon: "🔔",
       },
@@ -60,7 +112,7 @@ async function StatsCards() {
                   </span>
                 </div>
                 <span className="text-2xl font-bold text-green-800">
-                  {dashboardData.stockPlansResume.activeStockPlans}
+                  {breakdown.activePlans}
                 </span>
               </div>
             </div>
@@ -74,7 +126,7 @@ async function StatsCards() {
                   </span>
                 </div>
                 <span className="text-2xl font-bold text-red-800">
-                  {dashboardData.stockPlansResume.inactiveStockPlans}
+                  {breakdown.inactivePlans}
                 </span>
               </div>
             </div>
