@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { cn } from "../../shared/lib/utils";
+import { ModalNewClient, useModalNewClient } from "@/widgets/modalNewClient";
+import { Notification } from "@/shared/ui/notification";
+import { useNotification } from "@/shared/hooks/useNotification";
 
 // Layout específico para la sección de admin
 export default function AdminLayout({
@@ -10,6 +13,14 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const [activeClient, setActiveClient] = useState<string | null>(null);
+  const { notification, hideNotification, showSuccess, showError } =
+    useNotification();
+
+  const { isOpen, openModal, closeModal, handleSubmit } = useModalNewClient({
+    onSuccess: (message) => showSuccess("Empresa creada exitosamente", message),
+    onError: (message) => showError("Error al crear la empresa", message),
+  });
+
   const clients = [
     {
       id: "1",
@@ -76,12 +87,12 @@ export default function AdminLayout({
               </li>
             ))}
             <li>
-              <a
-                href="/admin/new-client"
+              <button
+                onClick={openModal}
                 className="flex justify-center items-center px-6 py-2 h-6 mx-6 my-3 w-auto border border-dashed border-gray-600 hover:text-gray-900 hover:bg-gray-50"
               >
                 <span className="text-gray-500 text-xl">+</span>
-              </a>
+              </button>
             </li>
           </ul>
 
@@ -129,6 +140,22 @@ export default function AdminLayout({
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto">{children}</div>
+
+      {/* Modal New Client */}
+      <ModalNewClient
+        isOpen={isOpen}
+        onClose={closeModal}
+        onSubmit={handleSubmit}
+      />
+
+      {/* Notification */}
+      <Notification
+        type={notification.type}
+        title={notification.title}
+        message={notification.message}
+        isVisible={notification.isVisible}
+        onClose={hideNotification}
+      />
     </div>
   );
 }

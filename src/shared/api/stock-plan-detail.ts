@@ -11,68 +11,68 @@ const generateMockContracts = (
 ): Contract[] => {
   const mockContracts: Contract[] = [
     {
-      employee_id: "9ada9395-7d90-498f-97ff-3c722062dacb",
-      employee_external_id: "E00021",
-      employee_last_name: "FakePaterno",
-      employee_middle_name: "FakeMaterno",
-      employee_name: "Tupac Alb",
-      contract_name: "Contrato tipo PEU 2025 - miles",
-      contract_id: "90fef074-9b33-4301-a73d-3183a8e510f0",
-      stock_plan_name: stockPlanName,
-      stock_plan_id: stockPlanId,
-      contract_external_id: "C0020",
-      contract_type: "peu",
-      assignment_date: "2025-08-01T00:00:00",
-      payment_frequency: "yearly",
-      vesting_schedule_status: "in_progress",
+      employeeId: "9ada9395-7d90-498f-97ff-3c722062dacb",
+      employeeExternalId: "E00021",
+      employeeLastName: "FakePaterno",
+      employeeMiddleName: "FakeMaterno",
+      employeeName: "Tupac Alb",
+      contractName: "Contrato tipo PEU 2025 - miles",
+      contractId: "90fef074-9b33-4301-a73d-3183a8e510f0",
+      stockPlanName: stockPlanName,
+      stockPlanId: stockPlanId,
+      contractExternalId: "C0020",
+      contractType: "peu",
+      assignmentDate: "2025-08-01T00:00:00",
+      paymentFrequency: "yearly",
+      vestingScheduleStatus: "in_progress",
     },
     {
-      employee_id: "8bda8395-7d90-498f-97ff-3c722062dacb",
-      employee_external_id: "E00022",
-      employee_last_name: "González",
-      employee_middle_name: "María",
-      employee_name: "Ana González",
-      contract_name: "Contrato tipo RSU 2025 - ejecutivo",
-      contract_id: "91fef074-9b33-4301-a73d-3183a8e510f1",
-      stock_plan_name: stockPlanName,
-      stock_plan_id: stockPlanId,
-      contract_external_id: "C0021",
-      contract_type: "rsu",
-      assignment_date: "2025-07-15T00:00:00",
-      payment_frequency: "quarterly",
-      vesting_schedule_status: "in_progress",
+      employeeId: "8bda8395-7d90-498f-97ff-3c722062dacb",
+      employeeExternalId: "E00022",
+      employeeLastName: "González",
+      employeeMiddleName: "María",
+      employeeName: "Ana González",
+      contractName: "Contrato tipo RSU 2025 - ejecutivo",
+      contractId: "91fef074-9b33-4301-a73d-3183a8e510f1",
+      stockPlanName: stockPlanName,
+      stockPlanId: stockPlanId,
+      contractExternalId: "C0021",
+      contractType: "rsu",
+      assignmentDate: "2025-07-15T00:00:00",
+      paymentFrequency: "quarterly",
+      vestingScheduleStatus: "in_progress",
     },
     {
-      employee_id: "7cda8395-7d90-498f-97ff-3c722062dacb",
-      employee_external_id: "E00023",
-      employee_last_name: "Rodríguez",
-      employee_middle_name: "Carlos",
-      employee_name: "Luis Rodríguez",
-      contract_name: "Contrato tipo PEU 2025 - senior",
-      contract_id: "92fef074-9b33-4301-a73d-3183a8e510f2",
-      stock_plan_name: stockPlanName,
-      stock_plan_id: stockPlanId,
-      contract_external_id: "C0022",
-      contract_type: "peu",
-      assignment_date: "2025-06-01T00:00:00",
-      payment_frequency: "yearly",
-      vesting_schedule_status: "released",
+      employeeId: "7cda8395-7d90-498f-97ff-3c722062dacb",
+      employeeExternalId: "E00023",
+      employeeLastName: "Rodríguez",
+      employeeMiddleName: "Carlos",
+      employeeName: "Luis Rodríguez",
+      contractName: "Contrato tipo PEU 2025 - senior",
+      contractId: "92fef074-9b33-4301-a73d-3183a8e510f2",
+      stockPlanName: stockPlanName,
+      stockPlanId: stockPlanId,
+      contractExternalId: "C0022",
+      contractType: "peu",
+      assignmentDate: "2025-06-01T00:00:00",
+      paymentFrequency: "yearly",
+      vestingScheduleStatus: "released",
     },
     {
-      employee_id: "6dda8395-7d90-498f-97ff-3c722062dacb",
-      employee_external_id: "E00024",
-      employee_last_name: "Martínez",
-      employee_middle_name: "Isabel",
-      employee_name: "Carmen Martínez",
-      contract_name: "Contrato tipo RSU 2025 - manager",
-      contract_id: "93fef074-9b33-4301-a73d-3183a8e510f3",
-      stock_plan_name: stockPlanName,
-      stock_plan_id: stockPlanId,
-      contract_external_id: "C0023",
-      contract_type: "rsu",
-      assignment_date: "2025-05-20T00:00:00",
-      payment_frequency: "yearly",
-      vesting_schedule_status: "pending",
+      employeeId: "6dda8395-7d90-498f-97ff-3c722062dacb",
+      employeeExternalId: "E00024",
+      employeeLastName: "Martínez",
+      employeeMiddleName: "Isabel",
+      employeeName: "Carmen Martínez",
+      contractName: "Contrato tipo RSU 2025 - manager",
+      contractId: "93fef074-9b33-4301-a73d-3183a8e510f3",
+      stockPlanName: stockPlanName,
+      stockPlanId: stockPlanId,
+      contractExternalId: "C0023",
+      contractType: "rsu",
+      assignmentDate: "2025-05-20T00:00:00",
+      paymentFrequency: "yearly",
+      vestingScheduleStatus: "pending",
     },
   ];
 
@@ -96,45 +96,45 @@ export class StockPlanDetailService {
       // Datos mock basados en el ID del stock plan
       const mockStockPlans = {
         "5150dedb-e868-41ae-9172-0291703ddb8c": {
-          external_id: "SP001",
+          externalId: "SP001",
           title: "Plan de Acciones 2025 - Ejecutivos",
-          total_non_vestedshares: 15000,
+          totalNonVestedShares: 15000,
         },
         "87400338-172a-4437-9019-caf432f2c364": {
-          external_id: "SP002",
+          externalId: "SP002",
           title: "Plan de Acciones 2025 - Managers",
-          total_non_vestedshares: 8500,
+          totalNonVestedShares: 8500,
         },
         "85a62d05-66b7-4e6b-a405-b5e990c36c90": {
-          external_id: "SP003",
+          externalId: "SP003",
           title: "Plan de Acciones 2025 - Seniors",
-          total_non_vestedshares: 12000,
+          totalNonVestedShares: 12000,
         },
         "781c9744-7aef-4285-b7ba-ef0cc9bbc394": {
-          external_id: "SP004",
+          externalId: "SP004",
           title: "Plan de Acciones 2025 - Junior",
-          total_non_vestedshares: 7500,
+          totalNonVestedShares: 7500,
         },
         "cec42649-d64e-4635-90dd-d5438255bdd8": {
-          external_id: "SP005",
+          externalId: "SP005",
           title: "Plan de Acciones 2025 - Lead",
-          total_non_vestedshares: 9000,
+          totalNonVestedShares: 9000,
         },
         // Mantener los IDs antiguos para compatibilidad
         "34565434565456": {
-          external_id: "SP001",
+          externalId: "SP001",
           title: "Plan de Acciones 2025 - Ejecutivos",
-          total_non_vestedshares: 15000,
+          totalNonVestedShares: 15000,
         },
         "1234567654567": {
-          external_id: "SP002",
+          externalId: "SP002",
           title: "Plan de Acciones 2025 - Managers",
-          total_non_vestedshares: 8500,
+          totalNonVestedShares: 8500,
         },
         ullamco: {
-          external_id: "SP003",
+          externalId: "SP003",
           title: "Plan de Acciones 2025 - Seniors",
-          total_non_vestedshares: 12000,
+          totalNonVestedShares: 12000,
         },
       };
 
@@ -154,37 +154,37 @@ export class StockPlanDetailService {
 
       // Calcular resumen
       const summary = {
-        total_contracts: contracts.length,
-        active_contracts: contracts.filter(
-          (c) => c.vesting_schedule_status === "in_progress",
+        totalContracts: contracts.length,
+        activeContracts: contracts.filter(
+          (c) => c.vestingScheduleStatus === "in_progress",
         ).length,
-        total_employees: contracts.length, // En este caso 1 contrato = 1 empleado
-        breakdown_by_type: {
-          peu: contracts.filter((c) => c.contract_type === "peu").length,
-          rsu: contracts.filter((c) => c.contract_type === "rsu").length,
+        totalEmployees: contracts.length, // En este caso 1 contrato = 1 empleado
+        breakdownByType: {
+          peu: contracts.filter((c) => c.contractType === "peu").length,
+          rsu: contracts.filter((c) => c.contractType === "rsu").length,
         },
-        breakdown_by_status: {
+        breakdownByStatus: {
           pending: contracts.filter(
-            (c) => c.vesting_schedule_status === "pending",
+            (c) => c.vestingScheduleStatus === "pending",
           ).length,
           in_progress: contracts.filter(
-            (c) => c.vesting_schedule_status === "in_progress",
+            (c) => c.vestingScheduleStatus === "in_progress",
           ).length,
           released: contracts.filter(
-            (c) => c.vesting_schedule_status === "released",
+            (c) => c.vestingScheduleStatus === "released",
           ).length,
           expired: contracts.filter(
-            (c) => c.vesting_schedule_status === "expired",
+            (c) => c.vestingScheduleStatus === "expired",
           ).length,
         },
       };
 
       const stockPlanDetail: StockPlanDetail = {
-        stock_plan_id: stockPlanId,
-        stock_plan_name: planInfo.title,
-        external_id: planInfo.external_id,
+        stockPlanId: stockPlanId,
+        stockPlanName: planInfo.title,
+        externalId: planInfo.externalId,
         title: planInfo.title,
-        total_non_vestedshares: planInfo.total_non_vestedshares,
+        totalNonVestedShares: planInfo.totalNonVestedShares,
         contracts,
         summary,
       };
@@ -224,21 +224,21 @@ export class StockPlanDetailService {
 
       if (filters?.contractType) {
         filteredContracts = filteredContracts.filter(
-          (contract) => contract.contract_type === filters.contractType,
+          (contract) => contract.contractType === filters.contractType,
         );
       }
 
       if (filters?.status) {
         filteredContracts = filteredContracts.filter(
-          (contract) => contract.vesting_schedule_status === filters.status,
+          (contract) => contract.vestingScheduleStatus === filters.status,
         );
       }
 
       if (filters?.employeeId) {
         filteredContracts = filteredContracts.filter(
           (contract) =>
-            contract.employee_id.includes(filters.employeeId!) ||
-            contract.employee_external_id.includes(filters.employeeId!),
+            contract.employeeId.includes(filters.employeeId!) ||
+            contract.employeeExternalId.includes(filters.employeeId!),
         );
       }
 

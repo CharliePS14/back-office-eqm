@@ -53,31 +53,31 @@ function ContractRow({ contract }: { contract: Contract }) {
         <div className="flex items-center">
           <div>
             <div className="text-sm font-medium text-gray-900">
-              {contract.employee_name}
+              {contract.employeeName}
             </div>
             <div className="text-sm text-gray-500">
-              {contract.employee_external_id}
+              {contract.employeeExternalId}
             </div>
           </div>
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm text-gray-900">{contract.contract_name}</div>
+        <div className="text-sm text-gray-900">{contract.contractName}</div>
         <div className="text-sm text-gray-500">
-          {contract.contract_external_id}
+          {contract.contractExternalId}
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        {getContractTypeBadge(contract.contract_type)}
+        {getContractTypeBadge(contract.contractType)}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {new Date(contract.assignment_date).toLocaleDateString("es-ES")}
+        {new Date(contract.assignmentDate).toLocaleDateString("es-ES")}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-        {contract.payment_frequency}
+        {contract.paymentFrequency}
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        {getStatusBadge(contract.vesting_schedule_status)}
+        {getStatusBadge(contract.vestingScheduleStatus)}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         <button className="text-indigo-600 hover:text-indigo-900">
@@ -163,7 +163,7 @@ function ContractsTable({ contracts }: { contracts: Contract[] }) {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {contracts.map((contract) => (
-              <ContractRow key={contract.contract_id} contract={contract} />
+              <ContractRow key={contract.contractId} contract={contract} />
             ))}
           </tbody>
         </table>

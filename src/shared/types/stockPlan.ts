@@ -1,36 +1,36 @@
 export interface Contract {
-  employee_id: string;
-  employee_external_id: string;
-  employee_last_name: string;
-  employee_middle_name: string;
-  employee_name: string;
-  contract_name: string;
-  contract_id: string;
-  stock_plan_name: string;
-  stock_plan_id: string;
-  contract_external_id: string;
-  contract_type: "peu" | "rsu";
-  assignment_date: string;
-  payment_frequency: "monthly" | "quarterly" | "yearly" | "triennial";
-  vesting_schedule_status: "pending" | "in_progress" | "released" | "expired";
+  employeeId: string;
+  employeeExternalId: string;
+  employeeLastName: string;
+  employeeMiddleName: string;
+  employeeName: string;
+  contractName: string;
+  contractId: string;
+  stockPlanName: string;
+  stockPlanId: string;
+  contractExternalId: string;
+  contractType: "peu" | "rsu";
+  assignmentDate: string;
+  paymentFrequency: "monthly" | "quarterly" | "yearly" | "triennial";
+  vestingScheduleStatus: "pending" | "in_progress" | "released" | "expired";
 }
 
 export interface StockPlanDetail {
-  stock_plan_id: string;
-  stock_plan_name: string;
-  external_id: string;
+  stockPlanId: string;
+  stockPlanName: string;
+  externalId: string;
   title: string;
-  total_non_vestedshares: number;
+  totalNonVestedShares: number;
   contracts: Contract[];
   summary: {
-    total_contracts: number;
-    active_contracts: number;
-    total_employees: number;
-    breakdown_by_type: {
+    totalContracts: number;
+    activeContracts: number;
+    totalEmployees: number;
+    breakdownByType: {
       peu: number;
       rsu: number;
     };
-    breakdown_by_status: {
+    breakdownByStatus: {
       pending: number;
       in_progress: number;
       released: number;
