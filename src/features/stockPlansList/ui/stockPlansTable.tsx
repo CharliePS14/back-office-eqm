@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useStockPlans } from "@/shared/hooks/use-dashboard";
 import { LoadingCard } from "@/shared/ui/loading";
 import { ErrorDisplay } from "@/shared/ui/error-display";
@@ -14,40 +15,17 @@ interface StockPlansTableProps {
 }
 
 function StockPlanRow({ plan }: { plan: StockPlan }) {
-  const getStatusBadge = (status: string) => {
-    const statusClasses = {
-      pending: "bg-yellow-100 text-yellow-800",
-      in_progress: "bg-blue-100 text-blue-800",
-      released: "bg-green-100 text-green-800",
-      expired: "bg-red-100 text-red-800",
-    };
+  const router = useRouter();
 
-    return (
-      <span
-        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClasses[status as keyof typeof statusClasses] || "bg-gray-100 text-gray-800"}`}
-      >
-        {status.replace("_", " ")}
-      </span>
-    );
-  };
-
-  const getContractTypeBadge = (type: string) => {
-    const typeClasses = {
-      rsu: "bg-purple-100 text-purple-800",
-      peu: "bg-indigo-100 text-indigo-800",
-    };
-
-    return (
-      <span
-        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${typeClasses[type as keyof typeof typeClasses] || "bg-gray-100 text-gray-800"}`}
-      >
-        {type.toUpperCase()}
-      </span>
-    );
+  const handleRowClick = () => {
+    router.push(`/admin/stock-plan/${plan.stock_plan_id}`);
   };
 
   return (
-    <tr className="hover:bg-gray-50">
+    <tr
+      className="hover:bg-gray-50 cursor-pointer transition-colors"
+      onClick={handleRowClick}
+    >
       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
         {plan.external_id}
       </td>
