@@ -35,19 +35,49 @@ async function StatsCards() {
 
     return (
       <div>
-        <div className="bg-white rounded-lg shadow-sm border p-6 mb-8 max-w-2xl">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-sm font-medium text-gray-600">Stock Plans</p>
+        <div className="bg-gradient-to-br from-white to-gray-50 rounded-xl shadow-lg border border-gray-100 p-8 mb-8 max-w-3xl backdrop-blur-sm">
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                <span className="text-white text-xl font-bold">📊</span>
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-900">Stock Plans</h3>
+                <p className="text-sm text-gray-500">
+                  Resumen de planes activos
+                </p>
+              </div>
             </div>
           </div>
-          <div className="mt-4 flex items-center gap-4">
-            <span className="text-sm font-medium text-green-600">
-              {dashboardData.stockPlansResume.activeStockPlans} Activos
-            </span>
-            <span className="text-sm font-medium text-red-600">
-              {dashboardData.stockPlansResume.inactiveStockPlans} Inactivos
-            </span>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-green-100 rounded-full -mr-8 -mt-8 opacity-20"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-xs font-medium text-green-700 uppercase tracking-wide">
+                    Activos
+                  </span>
+                </div>
+                <span className="text-2xl font-bold text-green-800">
+                  {dashboardData.stockPlansResume.activeStockPlans}
+                </span>
+              </div>
+            </div>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-red-100 rounded-full -mr-8 -mt-8 opacity-20"></div>
+              <div className="relative">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                  <span className="text-xs font-medium text-red-700 uppercase tracking-wide">
+                    Inactivos
+                  </span>
+                </div>
+                <span className="text-2xl font-bold text-red-800">
+                  {dashboardData.stockPlansResume.inactiveStockPlans}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
