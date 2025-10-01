@@ -77,10 +77,10 @@ export default function AdminLayout({
             ))}
             <li>
               <a
-                href="/admin/notifications"
-                className="flex items-center px-6 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                href="/admin/new-client"
+                className="flex justify-center items-center px-6 py-2 h-6 mx-6 my-3 w-auto border border-dashed border-gray-600 hover:text-gray-900 hover:bg-gray-50"
               >
-                <span className="mr-3">🔔</span>+
+                <span className="text-gray-500 text-xl">+</span>
               </a>
             </li>
           </ul>
